@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct flashcardApp: App {
     @StateObject private var store = DeckStore()
-    @AppStorage("darkMode") private var isDarkMode: Bool = false
+    @AppStorage("darkMode") private var isDarkMode = false
 
     var body: some Scene {
         WindowGroup {

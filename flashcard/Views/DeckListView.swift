@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DeckListView: View {
     @EnvironmentObject var store: DeckStore
+    @State private var showingAddDeck = false
     
     let columns = [
         GridItem(.flexible(), spacing: 16),
@@ -19,13 +20,12 @@ struct DeckListView: View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 16) {
                 ForEach(store.decks) { deck in
-                    NavigationLink(destination: StudyView(deck: deck)) {
+                    NavigationLink(destination: DeckDetailview(deckID: deck.id)) {
                         VStack(alignment: .leading, spacing: 12) {
                             Text(deck.name)
                                 .font(.system(size: 18, weight: .bold))
                                 .foregroundColor(.black)
                                 .multilineTextAlignment(.leading)
-                                .fixedSize(horizontal: false, vertical: true)
                             
                             Spacer()
                             
@@ -44,11 +44,19 @@ struct DeckListView: View {
         }
         .navigationTitle("Flashcards")
         .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button { showingAddDeck = true } label: {
+                    Image(systemName: "plus")
+                }
+            }
             ToolbarItem(placement: .topBarTrailing) {
                 NavigationLink(destination: SettingsView()) {
                     Image(systemName: "gear")
                 }
             }
+        }
+        .sheet(isPresented: $showingAddDeck) {
+            AddDeckView()
         }
     }
 }

@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct StudyView: View {
-    let deck: Deck
-    @AppStorage("shuffleCards") private var shuffleCards: Bool = true
-    @AppStorage("cardsPerSession") private var cardsPerSession: Int = 10
-    @AppStorage("showBackFirst") private var showBackFirst: Bool = false
+    let deck: DeckModel
+    @AppStorage("shuffleCards") private var shuffleCards = true
+    @AppStorage("cardsPerSession") private var cardsPerSession = 10
+    @AppStorage("showBackFirst") private var showBackFirst = false
     
-    @State private var index: Int = 0
-    @State private var isFlipped: Bool = false
-    @State private var sessionCards: [Flashcard] = []
+    @State private var index = 0
+    @State private var isFlipped = false
+    @State private var sessionCards: [FlashcardModel] = []
 
     var body: some View {
         VStack(spacing: 25) {

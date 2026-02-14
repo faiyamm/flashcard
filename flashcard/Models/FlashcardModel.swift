@@ -5,17 +5,16 @@
 //  Created by Fai on 13/02/26.
 //
 
-import SwiftUI
+import Foundation
 
-struct Deck: Identifiable {
-    let id = UUID()
-    var name: String
-    var cards: [Flashcard]
-    var color: Color
-}
-
-struct Flashcard: Identifiable {
-    let id = UUID()
-    var front: String
+struct FlashcardModel: Identifiable, Codable, Equatable {
+    let id: UUID
+    let front: String
     var back: String
+    
+    init(id: UUID = UUID(), front: String, back: String) {
+        self.id = id
+        self.front = front
+        self.back = back
+    }
 }
